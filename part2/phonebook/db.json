@@ -1,0 +1,35 @@
+{
+  "persons": [
+    {
+      "name": "Kishor kumar",
+      "number": "9080201810",
+      "id": "1"
+    },
+    {
+      "name": "meganathan",
+      "number": "6382456744",
+      "id": "2"
+    },
+    {
+      "name": "Nithish",
+      "number": "7904997119",
+      "id": "4"
+    },
+    {
+      "name": "Tejaswini",
+      "number": "9080201824",
+      "id": "5"
+    },
+    {
+      "name": "Karthika",
+      "number": "9080267624",
+      "id": "6"
+    },
+    {
+      "name": "pawansai",
+      "number": "9080201820",
+      "id": "WZ5ladfCVyI"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
