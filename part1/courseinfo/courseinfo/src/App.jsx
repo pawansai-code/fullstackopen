@@ -1,23 +1,34 @@
-import { useState } from 'react';
-import Button from './Button';
-import Statistics from './Statistics';
+import Course from './components/Course'
 
 const App = () => {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
+  const courses = [
+    {
+      name: 'Half Stack application development',
+      id: 1,
+      parts: [
+        { name: 'Fundamentals of React', exercises: 10, id: 1 },
+        { name: 'Using props to pass data', exercises: 7, id: 2 },
+        { name: 'State of a component', exercises: 14, id: 3 },
+        { name: 'Redux', exercises: 11, id: 4 }
+      ]
+    },
+    {
+      name: 'Node.js',
+      id: 2,
+      parts: [
+        { name: 'Routing', exercises: 3, id: 1 },
+        { name: 'Middlewares', exercises: 7, id: 2 }
+      ]
+    }
+  ]
 
   return (
     <div>
-      <h1>give feedback</h1>
-      <Button onClick={() => setGood(good + 1)} text="good" />
-      <Button onClick={() => setNeutral(neutral + 1)} text="neutral" />
-      <Button onClick={() => setBad(bad + 1)} text="bad" />
-      
-      <h1>statistics</h1>
-      <Statistics good={good} neutral={neutral} bad={bad} />
+      {courses.map(course => (
+        <Course key={course.id} course={course} />
+      ))}
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
