@@ -44,7 +44,7 @@ const App = () => {
   return (
     <div>
       <div>
-        find countries: 
+        find countries:
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -71,11 +71,11 @@ const App = () => {
       {selectedCountry && (
         <div>
           <h2>{selectedCountry.name.common}</h2>
-          
+
           {selectedCountry.capital && (
             <p>Capital: {selectedCountry.capital[0]}</p>
           )}
-          
+
           <p>Area: {selectedCountry.area}</p>
 
           <h3>Languages</h3>
@@ -100,7 +100,7 @@ const App = () => {
               <h3>Weather in {selectedCountry.capital[0]}</h3>
               <p>Temperature {weather.main?.temp} °C</p>
               {weather.weather && weather.weather[0] && (
-                 <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt="weather icon" />
+                <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt="weather icon" />
               )}
               <p>Wind {weather.wind?.speed} m/s</p>
             </div>

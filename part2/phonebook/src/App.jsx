@@ -1,15 +1,16 @@
-// src/App.jsx
 import { useState, useEffect } from 'react'
 import personService from './services/persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     personService
@@ -36,6 +37,13 @@ const App = () => {
             setPersons(persons.map(p => p.id !== existingPerson.id ? p : response.data))
             setNewName('')
             setNewNumber('')
+            setErrorMessage(`Updated ${response.data.name}`)
+            setTimeout(() => setErrorMessage(null), 5000)
+          })
+          .catch(error => {
+            setErrorMessage(`Information of ${existingPerson.name} has already been removed from server`)
+            setTimeout(() => setErrorMessage(null), 5000)
+            setPersons(persons.filter(p => p.id !== existingPerson.id))
           })
       }
     } else {
@@ -45,15 +53,23 @@ const App = () => {
           setPersons(persons.concat(response.data))
           setNewName('')
           setNewNumber('')
+          setErrorMessage(`Added ${response.data.name}`)
+          setTimeout(() => setErrorMessage(null), 5000)
         })
     }
   }
 
   const deletePerson = id => {
+    const personToDelete = persons.find(p => p.id === id)
     if (window.confirm("Delete this person?")) {
       personService
         .remove(id)
         .then(() => {
+          setPersons(persons.filter(p => p.id !== id))
+        })
+        .catch(error => {
+          setErrorMessage(`Information of ${personToDelete.name} has already been removed from server`)
+          setTimeout(() => setErrorMessage(null), 5000)
           setPersons(persons.filter(p => p.id !== id))
         })
     }
@@ -70,6 +86,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={errorMessage} />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
 
       <h3>Add a new</h3>
