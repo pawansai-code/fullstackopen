@@ -41,9 +41,13 @@ const App = () => {
             setTimeout(() => setErrorMessage(null), 5000)
           })
           .catch(error => {
-            setErrorMessage(`Information of ${existingPerson.name} has already been removed from server`)
+            if (error.response.data && error.response.data.error) {
+              setErrorMessage(error.response.data.error)
+            } else {
+              setErrorMessage(`Information of ${existingPerson.name} has already been removed from server`)
+              setPersons(persons.filter(p => p.id !== existingPerson.id))
+            }
             setTimeout(() => setErrorMessage(null), 5000)
-            setPersons(persons.filter(p => p.id !== existingPerson.id))
           })
       }
     } else {
@@ -54,6 +58,10 @@ const App = () => {
           setNewName('')
           setNewNumber('')
           setErrorMessage(`Added ${response.data.name}`)
+          setTimeout(() => setErrorMessage(null), 5000)
+        })
+        .catch(error => {
+          setErrorMessage(error.response.data.error)
           setTimeout(() => setErrorMessage(null), 5000)
         })
     }
