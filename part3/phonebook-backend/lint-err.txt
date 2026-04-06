@@ -1,0 +1,13 @@
+
+> lint
+> eslint .
+
+
+D:\COURSE\fullstackopen\part3\phonebook-backend\index.js
+  48:11  error  'result' is defined but never used  no-unused-vars
+
+D:\COURSE\fullstackopen\part3\phonebook-backend\models\person.js
+  10:9  error  'result' is defined but never used  no-unused-vars
+
+✖ 2 problems (2 errors, 0 warnings)
+
